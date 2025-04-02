@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post Assistant</title>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Bienvenue sur Post Assistant</h2>
+      <button
+        class="bg-blue-500 text-white p-2 rounded"
+        hx-get="http://127.0.0.1:8000/api/best_time"
+        hx-target="#result"
+      >
+        Obtenir le meilleur moment pour poster
+      </button>
+      <div id="result" class="mt-4 text-gray-700"></div>
+    </div>
+  </body>
+</html>
