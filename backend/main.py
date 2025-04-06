@@ -4,6 +4,7 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
 from fastapi.openapi.utils import get_openapi
+from backend.socials import get_best_posting_time
 
 app = FastAPI()
 
@@ -47,7 +48,7 @@ app.openapi = custom_openapi
 fake_users_db = {
     "admin": {
         "username": "admin",
-        "hashed_password": "$2b$12$xWyS14Tt1Zq3rfpe86/Dm.d32GYzvL9Lx/8yewhBws/f3cEp7xWRe",  # Remplace par un vrai hash bcrypt
+        "hashed_password": "$2b$12$xWyS14Tt1Zq3rfpe86/Dm.d32GYzvL9Lx/8yewhBws/f3cEp7xWRe", 
     }
 }
 
@@ -96,5 +97,14 @@ async def protected_route(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Token invalide")
 
 @app.get("/api/best_time")
-async def get_best_time(user: str = Depends(get_current_user)):  # 🔒 PROTÉGÉ
-    return {"message": f"Bonjour {user}, le meilleur moment pour poster est mardi à 18h"}
+async def get_best_time(user: str = Depends(get_current_user)):
+    insta = get_best_posting_time("instagram")
+    tiktok = get_best_posting_time("tiktok")
+    youtube = get_best_posting_time("youtube")
+
+    return {
+        "message": f"Bonjour {user}, voici les meilleurs horaires pour poster :",
+        "Instagram": insta,
+        "TikTok": tiktok,
+        "YouTube": youtube
+    }
