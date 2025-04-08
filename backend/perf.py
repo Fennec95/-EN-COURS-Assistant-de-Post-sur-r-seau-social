@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 
 # Exemple de données simulées (remplace ça par tes vraies données de l’API)
 posts_data = [
-    {"create_time": 1712505600, "stats": {"likes": 12000}},
-    {"create_time": 1712512800, "stats": {"likes": 9000}},
-    {"create_time": 1712520000, "stats": {"likes": 15000}},
-    {"create_time": 1712527200, "stats": {"likes": 4000}},
+    {"jour de publication": 1712505600, "stats": {"likes": 12000}},
+    {"jour de publication": 1712512800, "stats": {"likes": 9000}},
+    {"jour de publication": 1712520000, "stats": {"likes": 15000}},
+    {"jour de publication": 1712527200, "stats": {"likes": 4000}},
     # Ajoute ici les données de tous tes posts TikTok/Instagram
 ]
 
@@ -15,7 +15,7 @@ hours = []
 likes = []
 
 for post in posts_data:
-    timestamp = post["create_time"]
+    timestamp = post["jour de publication"]
     dt = datetime.fromtimestamp(timestamp)
     hours.append(dt.hour)
     likes.append(post["stats"]["likes"])
